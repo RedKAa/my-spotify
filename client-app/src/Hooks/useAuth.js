@@ -20,7 +20,6 @@ export default function useAuth(code) {
 
         //make URL clear
         window.history.pushState({}, null, "/");
-        return accessToken;
       })
       .catch(() => {
         window.location = "/";
@@ -46,4 +45,6 @@ export default function useAuth(code) {
 
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
+
+  return accessToken;
 }
