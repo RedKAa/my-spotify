@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../Hooks/useAuth";
 import { Container, Form } from "react-bootstrap";
-import TrackSearchResult from './TrackSearchResult';
+import TrackSearchResult from "./TrackSearchResult";
 import Player from "./Player";
-
 
 const SpotifyWebApi = require("spotify-web-api-node");
 const spotifyApi = new SpotifyWebApi({
@@ -18,10 +17,10 @@ export default function Dashboard({ code }) {
   const [playingTrack, setPlayingTrack] = useState();
   const [lyrics, setLyrics] = useState("");
 
-  function chooseTrack(track){
-    setPlayingTrack(track)
-    setSearch('')
-    setLyrics("")
+  function chooseTrack(track) {
+    setPlayingTrack(track);
+    setSearch("");
+    setLyrics("");
   }
 
   //ACCESS TOKEN useEffect
@@ -56,25 +55,26 @@ export default function Dashboard({ code }) {
         })
       );
     });
-    return () => (cancel = true);//CANCEL PREVIOUS REQUEST WHEN USER KEEP TYPING (~SEND ANOTHER REQUEST)
+    return () => (cancel = true); //CANCEL PREVIOUS REQUEST WHEN USER KEEP TYPING (~SEND ANOTHER REQUEST)
   }, [search, accessToken]);
 
   //LYRICS useEffect
   useEffect(() => {
-    if(!playingTrack) return
-      axios.get('http://localhost:3001/lyrics',{
-        params:{
-          track:playingTrack.title,
-          artist: playingTrack.artist
-        }
-      }).then(res => {
-        setLyrics(res.data.lyrics)
+    if (!playingTrack) return;
+    axios
+      .get("http://localhost:3001/lyrics", {
+        params: {
+          track: playingTrack.title,
+          artist: playingTrack.artist,
+        },
       })
-
-  },[playingTrack])
+      .then((res) => {
+        setLyrics(res.data.lyrics);
+      });
+  }, [playingTrack]);
 
   return (
-    <Container className="d-flex flex-column py-2" style={{ height: "100vh",}}>
+    <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
       {/*SEARCH BOX*/}
       <Form.Control
         type="search"
@@ -85,16 +85,22 @@ export default function Dashboard({ code }) {
 
       {/*SEARCH RESULT*/}
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
-        {searchResults.map(track => (
-          <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack}/>
+        {searchResults.map((track) => (
+          <TrackSearchResult
+            track={track}
+            key={track.uri}
+            chooseTrack={chooseTrack}
+          />
         ))}
-        {playingTrack!= null && playingTrack!= '' && (
-          <div className="text-center" style={{whiteSpace: "pre"}}>
+        {playingTrack != null && playingTrack != "" && (
+          <div className="text-center" style={{ whiteSpace: "pre" }}>
             {lyrics}
           </div>
         )}
       </div>
-      <div><Player accessToken={accessToken} trackUri={playingTrack?.uri}/></div>
+      <div>
+        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+      </div>
     </Container>
   );
 }
