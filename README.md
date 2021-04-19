@@ -5,6 +5,7 @@
 ### FOR CLIENT_APP: Reactjs, Bootstrap, Express, Axios, react-spotify-web-playback, spotify-web-api-node
 ### FOR SERVER: spotify-web-api-node, Dotenv, lyrics-finder, Express
 
+
 ## Available Scripts
 
 In the project directory, you can run:
