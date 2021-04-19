@@ -3,8 +3,15 @@
 
 # TECHNICAL
 ## This project using: 
-### FOR CLIENT_APP: `react-spotify-web-playback`, `spotify-web-api-node`, `Reactjs`, `Bootstrap`, `Express`, `Axios`
-### FOR SERVER: `spotify-web-api-node`, `Dotenv`, `lyrics-finder`, `Express`
+### FOR CLIENT_APP: 
+
+### `react-spotify-web-playback` `spotify-web-api-node` `Reactjs`
+
+### `Bootstrap` `Express` `Axios`
+
+### FOR SERVER:
+
+### `spotify-web-api-node` `Dotenv` `lyrics-finder` `Express`
 
 
 ## Available Scripts
